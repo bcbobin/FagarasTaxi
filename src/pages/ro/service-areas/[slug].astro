@@ -1,10 +1,10 @@
 ---
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
-import CallBand from "../../components/CallBand.astro";
-import { localBusinessSchema } from "../../components/LocalBusinessSchema";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import { getLocaleContent, type Locale } from "../../site.config";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import CallBand from "../../../components/CallBand.astro";
+import { localBusinessSchema } from "../../../components/LocalBusinessSchema";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getLocaleContent, type Locale } from "../../../site.config";
 
 interface Props {
   locale?: Locale;
@@ -12,14 +12,14 @@ interface Props {
 }
 
 export function getStaticPaths() {
-  const { business } = getLocaleContent("en");
+  const { business } = getLocaleContent("ro");
   return business.serviceAreas.map((area) => ({
     params: { slug: area.slug },
-    props: { area, locale: "en" satisfies Locale }
+    props: { area, locale: "ro" satisfies Locale }
   }));
 }
 
-const locale: Locale = Astro.props.locale ?? "en";
+const locale: Locale = Astro.props.locale ?? "ro";
 const { business, areaPage, nav } = getLocaleContent(locale);
 const { area } = Astro.props;
 const title = `${areaPage.titlePrefix} ${area.name} | ${business.name}`;

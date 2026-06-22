@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { taxiBusiness } from "../site.config";
+import { defaultLocale, getLocaleContent, localizedPath, type Locale } from "../site.config";
 
 interface Props {
   title: string;
@@ -8,28 +8,33 @@ interface Props {
   canonicalPath?: string;
   image?: string;
   schema?: Record<string, unknown> | Record<string, unknown>[];
+  locale?: Locale;
 }
 
 const {
   title,
   description,
   canonicalPath = "/",
-  image = taxiBusiness.heroImage,
+  locale = defaultLocale,
   schema
 } = Astro.props;
 
-const canonicalUrl = new URL(canonicalPath, taxiBusiness.baseUrl).toString();
-const imageUrl = new URL(image, taxiBusiness.baseUrl).toString();
+const { business, lang } = getLocaleContent(locale);
+const image = Astro.props.image ?? business.heroImage;
+const canonicalUrl = new URL(localizedPath(locale, canonicalPath), business.baseUrl).toString();
+const imageUrl = new URL(image, business.baseUrl).toString();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="en" href={new URL(localizedPath("en", canonicalPath), business.baseUrl).toString()} />
+    <link rel="alternate" hreflang="ro" href={new URL(localizedPath("ro", canonicalPath), business.baseUrl).toString()} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

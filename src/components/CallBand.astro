@@ -1,11 +1,18 @@
 ---
-import { taxiBusiness } from "../site.config";
+import { defaultLocale, getLocaleContent, type Locale } from "../site.config";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const { business, callBand, nav } = getLocaleContent(locale);
 ---
 
-<section class="call-band" aria-label="Book a taxi">
+<section class="call-band" aria-label={callBand.label}>
   <div>
-    <p class="eyebrow">Need a ride now?</p>
-    <h2>Call for a local taxi in {taxiBusiness.city}</h2>
+    <p class="eyebrow">{callBand.eyebrow}</p>
+    <h2>{callBand.heading}</h2>
   </div>
-  <a class="button button-dark" href={`tel:${taxiBusiness.phone}`}>Call {taxiBusiness.displayPhone}</a>
+  <a class="button button-dark" href={`tel:${business.phone}`}>{nav.call} {business.displayPhone}</a>
 </section>

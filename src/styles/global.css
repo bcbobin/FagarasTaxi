@@ -79,6 +79,30 @@ nav a {
   text-decoration: none;
 }
 
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.language-switch a {
+  min-width: 32px;
+  padding: 4px 7px;
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.language-switch a[aria-current="page"] {
+  background: var(--gold);
+  color: #141414;
+}
+
 .nav-call {
   padding: 9px 13px;
   border-radius: 6px;
@@ -396,7 +420,8 @@ h3 {
 }
 
 @media (max-width: 520px) {
-  nav a:not(.nav-call) {
+  nav a:not(.nav-call),
+  .language-switch {
     display: none;
   }
 

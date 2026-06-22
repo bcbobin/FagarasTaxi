@@ -4,36 +4,41 @@ import Footer from "../components/Footer.astro";
 import CallBand from "../components/CallBand.astro";
 import { localBusinessSchema } from "../components/LocalBusinessSchema";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { taxiBusiness } from "../site.config";
+import { getLocaleContent, type Locale } from "../site.config";
 
-const title = `Airport Taxi in ${taxiBusiness.city} | ${taxiBusiness.name}`;
-const description = `Pre-book an airport taxi in ${taxiBusiness.city} for departures, arrivals, luggage-friendly rides, and early morning pickups.`;
+interface Props {
+  locale?: Locale;
+}
+
+const locale: Locale = Astro.props.locale ?? "en";
+const { business, airportPage, nav } = getLocaleContent(locale);
+const path = "/airport-taxi/";
 ---
 
-<BaseLayout title={title} description={description} canonicalPath="/airport-taxi/" schema={localBusinessSchema("/airport-taxi/")}>
-  <Header />
+<BaseLayout title={airportPage.title} description={airportPage.description} canonicalPath={path} locale={locale} schema={localBusinessSchema(path, locale)}>
+  <Header locale={locale} currentPath={path} />
   <main class="page-main">
     <section class="page-hero">
-      <p class="eyebrow">Airport taxi</p>
-      <h1>Reliable airport transfers from {taxiBusiness.city}</h1>
-      <p>{description}</p>
-      <a class="button" href={`tel:${taxiBusiness.phone}`}>Call {taxiBusiness.displayPhone}</a>
+      <p class="eyebrow">{airportPage.eyebrow}</p>
+      <h1>{airportPage.heading}</h1>
+      <p>{airportPage.description}</p>
+      <a class="button" href={`tel:${business.phone}`}>{nav.call} {business.displayPhone}</a>
     </section>
     <section class="section detail-list">
       <article>
-        <h2>Departures</h2>
-        <p>Schedule pickup with your flight time, address, luggage needs, and preferred arrival buffer.</p>
+        <h2>{airportPage.departures}</h2>
+        <p>{airportPage.departuresText}</p>
       </article>
       <article>
-        <h2>Arrivals</h2>
-        <p>Arrange a taxi from the terminal to your home, hotel, office, or nearby destination.</p>
+        <h2>{airportPage.arrivals}</h2>
+        <p>{airportPage.arrivalsText}</p>
       </article>
       <article>
-        <h2>Pre-booking</h2>
-        <p>Pre-booking is recommended for early flights, busy travel days, and important appointments.</p>
+        <h2>{airportPage.prebooking}</h2>
+        <p>{airportPage.prebookingText}</p>
       </article>
     </section>
-    <CallBand />
+    <CallBand locale={locale} />
   </main>
-  <Footer />
+  <Footer locale={locale} />
 </BaseLayout>

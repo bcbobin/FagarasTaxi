@@ -1,16 +1,28 @@
 ---
-import { taxiBusiness } from "../site.config";
+import { defaultLocale, getLocaleContent, localizedPath, type Locale } from "../site.config";
+
+interface Props {
+  locale?: Locale;
+  currentPath?: string;
+}
+
+const { locale = defaultLocale, currentPath = "/" } = Astro.props;
+const { business, nav } = getLocaleContent(locale);
 ---
 
 <header class="site-header" aria-label="Primary navigation">
-  <a class="brand" href="/" aria-label={`${taxiBusiness.name} home`}>
-    <span class="brand-mark">LT</span>
-    <span>{taxiBusiness.name}</span>
+  <a class="brand" href={localizedPath(locale, "/")} aria-label={`${business.name} home`}>
+    <span class="brand-mark">FT</span>
+    <span>{business.name}</span>
   </a>
   <nav>
-    <a href="/services/">Services</a>
-    <a href="/airport-taxi/">Airport Taxi</a>
-    <a href="/service-areas/">Service Areas</a>
-    <a class="nav-call" href={`tel:${taxiBusiness.phone}`}>Call {taxiBusiness.displayPhone}</a>
+    <a href={localizedPath(locale, "/services/")}>{nav.services}</a>
+    <a href={localizedPath(locale, "/airport-taxi/")}>{nav.airport}</a>
+    <a href={localizedPath(locale, "/service-areas/")}>{nav.serviceAreas}</a>
+    <span class="language-switch" aria-label="Language selector">
+      <a aria-current={locale === "en" ? "page" : undefined} href={localizedPath("en", currentPath)}>EN</a>
+      <a aria-current={locale === "ro" ? "page" : undefined} href={localizedPath("ro", currentPath)}>RO</a>
+    </span>
+    <a class="nav-call" href={`tel:${business.phone}`}>{nav.call} {business.displayPhone}</a>
   </nav>
 </header>

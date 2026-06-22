@@ -1,15 +1,22 @@
 ---
-import { taxiBusiness } from "../site.config";
+import { defaultLocale, getLocaleContent, type Locale } from "../site.config";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = defaultLocale } = Astro.props;
+const { business, footer } = getLocaleContent(locale);
 ---
 
 <footer class="site-footer">
   <div>
-    <strong>{taxiBusiness.name}</strong>
-    <p>{taxiBusiness.city}, {taxiBusiness.region} taxi service for local rides, airport trips, and pre-booked pickups.</p>
+    <strong>{business.name}</strong>
+    <p>{footer.description}</p>
   </div>
   <div>
-    <a href={`tel:${taxiBusiness.phone}`}>{taxiBusiness.displayPhone}</a>
-    <a href={`mailto:${taxiBusiness.email}`}>{taxiBusiness.email}</a>
-    <a href={taxiBusiness.googleMapsUrl}>Google Maps</a>
+    <a href={`tel:${business.phone}`}>{business.displayPhone}</a>
+    <a href={`mailto:${business.email}`}>{business.email}</a>
+    <a href={business.googleMapsUrl}>{footer.maps}</a>
   </div>
 </footer>

@@ -4,52 +4,57 @@ import Footer from "../components/Footer.astro";
 import CallBand from "../components/CallBand.astro";
 import { localBusinessSchema } from "../components/LocalBusinessSchema";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { taxiBusiness } from "../site.config";
+import { getLocaleContent, localizedPath, type Locale } from "../site.config";
 
-const title = `${taxiBusiness.name} | Taxi Service in ${taxiBusiness.city}, ${taxiBusiness.region}`;
-const description = `Call ${taxiBusiness.name} for reliable taxi rides, airport transfers, and pre-booked pickups in ${taxiBusiness.city} and nearby areas.`;
+interface Props {
+  locale?: Locale;
+}
+
+const locale: Locale = Astro.props.locale ?? "en";
+const { business, home, nav } = getLocaleContent(locale);
+const path = "/";
 ---
 
-<BaseLayout title={title} description={description} schema={localBusinessSchema("/")}>
-  <Header />
+<BaseLayout title={home.title} description={home.description} locale={locale} schema={localBusinessSchema(path, locale)}>
+  <Header locale={locale} currentPath={path} />
   <main>
     <section class="hero">
-      <img src={taxiBusiness.heroImage} alt={`Taxi service in ${taxiBusiness.city}`} />
+      <img src={business.heroImage} alt={`Taxi service in ${business.city}`} />
       <div class="hero-content">
-        <p class="eyebrow">24/7 local taxi service</p>
-        <h1>Taxi service in {taxiBusiness.city} you can count on</h1>
-        <p>{taxiBusiness.tagline}</p>
+        <p class="eyebrow">{home.heroEyebrow}</p>
+        <h1>{home.heroTitle}</h1>
+        <p>{business.tagline}</p>
         <div class="hero-actions">
-          <a class="button" href={`tel:${taxiBusiness.phone}`}>Call {taxiBusiness.displayPhone}</a>
-          <a class="button button-secondary" href="/service-areas/">View Service Areas</a>
+          <a class="button" href={`tel:${business.phone}`}>{nav.call} {business.displayPhone}</a>
+          <a class="button button-secondary" href={localizedPath(locale, "/service-areas/")}>{home.viewServiceAreas}</a>
         </div>
       </div>
     </section>
 
     <section class="section intro-grid">
       <div>
-        <p class="eyebrow">Local, direct, dependable</p>
-        <h2>Simple taxi booking without the fuss</h2>
-        <p>{taxiBusiness.description}</p>
+        <p class="eyebrow">{home.introEyebrow}</p>
+        <h2>{home.introTitle}</h2>
+        <p>{business.description}</p>
       </div>
       <div class="quick-card">
-        <span>Serving</span>
-        <strong>{taxiBusiness.city} + {taxiBusiness.serviceRadiusKm} km</strong>
-        <span>Available</span>
-        <strong>24 hours daily</strong>
+        <span>{home.serving}</span>
+        <strong>{business.city} + {business.serviceRadiusKm} km</strong>
+        <span>{home.available}</span>
+        <strong>{home.availableValue}</strong>
       </div>
     </section>
 
     <section class="section">
       <div class="section-heading">
-        <p class="eyebrow">Services</p>
-        <h2>Rides for everyday plans and important trips</h2>
+        <p class="eyebrow">{home.servicesEyebrow}</p>
+        <h2>{home.servicesTitle}</h2>
       </div>
       <div class="card-grid">
-        {taxiBusiness.services.map((service) => (
+        {business.services.map((service) => (
           <article class="service-card">
             <h3>{service}</h3>
-            <p>Book a clean, comfortable taxi with clear pickup details and friendly local service.</p>
+            <p>{home.serviceCardText}</p>
           </article>
         ))}
       </div>
@@ -57,26 +62,26 @@ const description = `Call ${taxiBusiness.name} for reliable taxi rides, airport 
 
     <section class="section split-band">
       <div>
-        <p class="eyebrow">Airport taxi</p>
-        <h2>Pre-book airport transfers</h2>
-        <p>Schedule a taxi for early flights, arrivals, luggage-friendly pickups, and door-to-terminal rides.</p>
-        <a class="text-link" href="/airport-taxi/">Airport taxi details</a>
+        <p class="eyebrow">{home.airportEyebrow}</p>
+        <h2>{home.airportTitle}</h2>
+        <p>{home.airportText}</p>
+        <a class="text-link" href={localizedPath(locale, "/airport-taxi/")}>{home.airportLink}</a>
       </div>
       <div>
-        <p class="eyebrow">Service areas</p>
-        <h2>Local coverage across nearby neighborhoods</h2>
-        <p>Use focused area pages to rank for searches like taxi near me, airport taxi, and local cab service.</p>
-        <a class="text-link" href="/service-areas/">Browse areas</a>
+        <p class="eyebrow">{home.areasEyebrow}</p>
+        <h2>{home.areasTitle}</h2>
+        <p>{home.areasText}</p>
+        <a class="text-link" href={localizedPath(locale, "/service-areas/")}>{home.areasLink}</a>
       </div>
     </section>
 
     <section class="section">
       <div class="section-heading">
-        <p class="eyebrow">Reviews</p>
-        <h2>Trusted by local riders</h2>
+        <p class="eyebrow">{home.reviewsEyebrow}</p>
+        <h2>{home.reviewsTitle}</h2>
       </div>
       <div class="review-grid">
-        {taxiBusiness.reviews.map((review) => (
+        {business.reviews.map((review) => (
           <figure class="review-card">
             <blockquote>{review.quote}</blockquote>
             <figcaption>{review.author}</figcaption>
@@ -85,7 +90,7 @@ const description = `Call ${taxiBusiness.name} for reliable taxi rides, airport 
       </div>
     </section>
 
-    <CallBand />
+    <CallBand locale={locale} />
   </main>
-  <Footer />
+  <Footer locale={locale} />
 </BaseLayout>

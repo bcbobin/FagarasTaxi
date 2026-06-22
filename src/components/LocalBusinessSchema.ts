@@ -1,33 +1,34 @@
-import { taxiBusiness } from "../site.config";
+import { defaultLocale, getLocaleContent, localizedPath, type Locale } from "../site.config";
 
-export function localBusinessSchema(path = "/") {
-  const url = new URL(path, taxiBusiness.baseUrl).toString();
+export function localBusinessSchema(path = "/", locale: Locale = defaultLocale) {
+  const { business } = getLocaleContent(locale);
+  const url = new URL(localizedPath(locale, path), business.baseUrl).toString();
 
   return {
     "@context": "https://schema.org",
     "@type": "TaxiService",
-    "@id": `${taxiBusiness.baseUrl}/#taxi-service`,
-    name: taxiBusiness.name,
-    legalName: taxiBusiness.legalName,
-    description: taxiBusiness.description,
+    "@id": `${business.baseUrl}/#taxi-service-${locale}`,
+    name: business.name,
+    legalName: business.legalName,
+    description: business.description,
     url,
-    telephone: taxiBusiness.phone,
-    email: taxiBusiness.email,
-    image: new URL(taxiBusiness.heroImage, taxiBusiness.baseUrl).toString(),
+    telephone: business.phone,
+    email: business.email,
+    image: new URL(business.heroImage, business.baseUrl).toString(),
     address: {
       "@type": "PostalAddress",
-      streetAddress: taxiBusiness.streetAddress,
-      addressLocality: taxiBusiness.city,
-      addressRegion: taxiBusiness.region,
-      postalCode: taxiBusiness.postalCode,
-      addressCountry: taxiBusiness.country
+      streetAddress: business.streetAddress,
+      addressLocality: business.city,
+      addressRegion: business.region,
+      postalCode: business.postalCode,
+      addressCountry: business.country
     },
-    areaServed: taxiBusiness.serviceAreas.map((area) => ({
+    areaServed: business.serviceAreas.map((area) => ({
       "@type": "Place",
       name: area.name
     })),
-    openingHours: taxiBusiness.openingHours,
+    openingHours: business.openingHours,
     priceRange: "$$",
-    serviceType: taxiBusiness.services
+    serviceType: business.services
   };
 }
