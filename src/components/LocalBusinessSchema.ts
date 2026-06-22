@@ -7,7 +7,7 @@ export function localBusinessSchema(path = "/", locale: Locale = defaultLocale) 
   return {
     "@context": "https://schema.org",
     "@type": "TaxiService",
-    "@id": `${business.baseUrl}/#taxi-service-${locale}`,
+    "@id": `${new URL(localizedPath(locale, "/"), business.baseUrl).toString()}#taxi-service-${locale}`,
     name: business.name,
     legalName: business.legalName,
     description: business.description,

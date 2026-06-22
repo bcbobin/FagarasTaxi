@@ -3,13 +3,15 @@ export type Locale = (typeof supportedLocales)[number];
 
 export const defaultLocale: Locale = "en";
 
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 const sharedBusiness = {
   phone: "+40-555-014-739",
   displayPhone: "0555 014 739",
   email: "bookings@example.com",
   serviceRadiusKm: 35,
-  baseUrl: "https://example.com",
-  heroImage: "/images/fagaras-taxi-hero.png",
+  baseUrl: "https://bcbobin.github.io",
+  heroImage: `${basePath}/images/fagaras-taxi-hero.png`,
   openingHours: [
     "Mo 00:00-23:59",
     "Tu 00:00-23:59",
@@ -309,8 +311,8 @@ export function getLocaleContent(locale: Locale = defaultLocale) {
 }
 
 export function localizedPath(locale: Locale, path: string) {
-  if (locale === defaultLocale) return path;
-  return path === "/" ? `/${locale}/` : `/${locale}${path}`;
+  const localized = locale === defaultLocale ? path : path === "/" ? `/${locale}/` : `/${locale}${path}`;
+  return `${basePath}${localized}`;
 }
 
 export const taxiBusiness = siteContent.en.business;
