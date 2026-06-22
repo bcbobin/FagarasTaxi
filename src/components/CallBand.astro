@@ -1,0 +1,11 @@
+---
+import { taxiBusiness } from "../site.config";
+---
+
+<section class="call-band" aria-label="Book a taxi">
+  <div>
+    <p class="eyebrow">Need a ride now?</p>
+    <h2>Call for a local taxi in {taxiBusiness.city}</h2>
+  </div>
+  <a class="button button-dark" href={`tel:${taxiBusiness.phone}`}>Call {taxiBusiness.displayPhone}</a>
+</section>

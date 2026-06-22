@@ -1,0 +1,34 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CallBand from "../components/CallBand.astro";
+import { localBusinessSchema } from "../components/LocalBusinessSchema";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { taxiBusiness } from "../site.config";
+
+const title = `Taxi Services in ${taxiBusiness.city} | ${taxiBusiness.name}`;
+const description = `Local taxi rides, airport transfers, appointment rides, and pre-booked pickups from ${taxiBusiness.name}.`;
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/services/" schema={localBusinessSchema("/services/")}>
+  <Header />
+  <main class="page-main">
+    <section class="page-hero">
+      <p class="eyebrow">Taxi services</p>
+      <h1>Local rides, airport transfers, and scheduled pickups</h1>
+      <p>{description}</p>
+    </section>
+    <section class="section">
+      <div class="card-grid">
+        {taxiBusiness.services.map((service) => (
+          <article class="service-card">
+            <h2>{service}</h2>
+            <p>Call ahead or book when you are ready. Clear pickup information helps your driver arrive smoothly.</p>
+          </article>
+        ))}
+      </div>
+    </section>
+    <CallBand />
+  </main>
+  <Footer />
+</BaseLayout>

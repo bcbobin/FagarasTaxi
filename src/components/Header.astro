@@ -1,0 +1,16 @@
+---
+import { taxiBusiness } from "../site.config";
+---
+
+<header class="site-header" aria-label="Primary navigation">
+  <a class="brand" href="/" aria-label={`${taxiBusiness.name} home`}>
+    <span class="brand-mark">LT</span>
+    <span>{taxiBusiness.name}</span>
+  </a>
+  <nav>
+    <a href="/services/">Services</a>
+    <a href="/airport-taxi/">Airport Taxi</a>
+    <a href="/service-areas/">Service Areas</a>
+    <a class="nav-call" href={`tel:${taxiBusiness.phone}`}>Call {taxiBusiness.displayPhone}</a>
+  </nav>
+</header>

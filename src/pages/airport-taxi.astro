@@ -1,0 +1,39 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CallBand from "../components/CallBand.astro";
+import { localBusinessSchema } from "../components/LocalBusinessSchema";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { taxiBusiness } from "../site.config";
+
+const title = `Airport Taxi in ${taxiBusiness.city} | ${taxiBusiness.name}`;
+const description = `Pre-book an airport taxi in ${taxiBusiness.city} for departures, arrivals, luggage-friendly rides, and early morning pickups.`;
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/airport-taxi/" schema={localBusinessSchema("/airport-taxi/")}>
+  <Header />
+  <main class="page-main">
+    <section class="page-hero">
+      <p class="eyebrow">Airport taxi</p>
+      <h1>Reliable airport transfers from {taxiBusiness.city}</h1>
+      <p>{description}</p>
+      <a class="button" href={`tel:${taxiBusiness.phone}`}>Call {taxiBusiness.displayPhone}</a>
+    </section>
+    <section class="section detail-list">
+      <article>
+        <h2>Departures</h2>
+        <p>Schedule pickup with your flight time, address, luggage needs, and preferred arrival buffer.</p>
+      </article>
+      <article>
+        <h2>Arrivals</h2>
+        <p>Arrange a taxi from the terminal to your home, hotel, office, or nearby destination.</p>
+      </article>
+      <article>
+        <h2>Pre-booking</h2>
+        <p>Pre-booking is recommended for early flights, busy travel days, and important appointments.</p>
+      </article>
+    </section>
+    <CallBand />
+  </main>
+  <Footer />
+</BaseLayout>

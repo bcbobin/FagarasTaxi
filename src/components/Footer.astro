@@ -1,0 +1,15 @@
+---
+import { taxiBusiness } from "../site.config";
+---
+
+<footer class="site-footer">
+  <div>
+    <strong>{taxiBusiness.name}</strong>
+    <p>{taxiBusiness.city}, {taxiBusiness.region} taxi service for local rides, airport trips, and pre-booked pickups.</p>
+  </div>
+  <div>
+    <a href={`tel:${taxiBusiness.phone}`}>{taxiBusiness.displayPhone}</a>
+    <a href={`mailto:${taxiBusiness.email}`}>{taxiBusiness.email}</a>
+    <a href={taxiBusiness.googleMapsUrl}>Google Maps</a>
+  </div>
+</footer>

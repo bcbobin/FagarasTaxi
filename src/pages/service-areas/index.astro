@@ -1,0 +1,35 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import CallBand from "../../components/CallBand.astro";
+import { localBusinessSchema } from "../../components/LocalBusinessSchema";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { taxiBusiness } from "../../site.config";
+
+const title = `Taxi Service Areas Near ${taxiBusiness.city} | ${taxiBusiness.name}`;
+const description = `See where ${taxiBusiness.name} provides local taxi service, airport transfers, and pre-booked rides near ${taxiBusiness.city}.`;
+---
+
+<BaseLayout title={title} description={description} canonicalPath="/service-areas/" schema={localBusinessSchema("/service-areas/")}>
+  <Header />
+  <main class="page-main">
+    <section class="page-hero">
+      <p class="eyebrow">Service areas</p>
+      <h1>Taxi service across {taxiBusiness.city} and nearby communities</h1>
+      <p>{description}</p>
+    </section>
+    <section class="section">
+      <div class="card-grid">
+        {taxiBusiness.serviceAreas.map((area) => (
+          <article class="service-card">
+            <h2>{area.name}</h2>
+            <p>{area.description}</p>
+            <a class="text-link" href={`/service-areas/${area.slug}/`}>Taxi in {area.name}</a>
+          </article>
+        ))}
+      </div>
+    </section>
+    <CallBand />
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import CallBand from "../../components/CallBand.astro";
+import { localBusinessSchema } from "../../components/LocalBusinessSchema";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { taxiBusiness } from "../../site.config";
+
+export function getStaticPaths() {
+  return taxiBusiness.serviceAreas.map((area) => ({
+    params: { slug: area.slug },
+    props: { area }
+  }));
+}
+
+const { area } = Astro.props;
+const title = `Taxi in ${area.name} | ${taxiBusiness.name}`;
+const description = `${area.description} Call ${taxiBusiness.displayPhone} for local taxi rides and airport transfers.`;
+const path = `/service-areas/${area.slug}/`;
+---
+
+<BaseLayout title={title} description={description} canonicalPath={path} schema={localBusinessSchema(path)}>
+  <Header />
+  <main class="page-main">
+    <section class="page-hero">
+      <p class="eyebrow">Local taxi service</p>
+      <h1>Taxi service in {area.name}</h1>
+      <p>{description}</p>
+      <a class="button" href={`tel:${taxiBusiness.phone}`}>Call {taxiBusiness.displayPhone}</a>
+    </section>
+    <section class="section detail-list">
+      <article>
+        <h2>Local pickups</h2>
+        <p>Book pickups from homes, hotels, restaurants, offices, stations, and local events in {area.name}.</p>
+      </article>
+      <article>
+        <h2>Airport transfers</h2>
+        <p>Arrange taxi service from {area.name} to the airport with room for luggage and schedule buffers.</p>
+      </article>
+      <article>
+        <h2>Pre-booked rides</h2>
+        <p>Plan ahead for appointments, work shifts, early mornings, or late-night rides home.</p>
+      </article>
+    </section>
+    <CallBand />
+  </main>
+  <Footer />
+</BaseLayout>
