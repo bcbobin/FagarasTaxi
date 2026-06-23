@@ -10,7 +10,7 @@ const sharedBusiness = {
   displayPhone: "0555 014 739",
   email: "bookings@example.com",
   serviceRadiusKm: 35,
-  baseUrl: "https://bcbobin.github.io",
+  baseUrl: "https://www.fagarastaxi.com",
   heroImage: `${basePath}/images/fagaras-taxi-hero.png`,
   openingHours: [
     "Mo 07:00-18:00",
