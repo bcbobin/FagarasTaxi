@@ -67,7 +67,8 @@ img {
   font-size: 0.86rem;
 }
 
-nav {
+.primary-nav {
+  position: relative;
   display: flex;
   align-items: center;
   gap: clamp(12px, 2vw, 24px);
@@ -75,7 +76,13 @@ nav {
   font-size: 0.95rem;
 }
 
-nav a {
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+}
+
+.primary-nav a {
   text-decoration: none;
 }
 
@@ -109,6 +116,61 @@ nav a {
   background: var(--ink);
   color: white;
   font-weight: 700;
+  white-space: nowrap;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.mobile-menu summary {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: white;
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobile-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-menu summary span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ink);
+}
+
+.mobile-menu-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  display: grid;
+  min-width: min(300px, calc(100vw - 36px));
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  box-shadow: var(--shadow);
+}
+
+.mobile-menu-panel a {
+  padding: 13px 14px;
+  border-radius: 6px;
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.mobile-menu-panel a:hover,
+.mobile-menu-panel a:focus-visible {
+  background: var(--soft);
 }
 
 .hero {
@@ -280,6 +342,7 @@ h3 {
 .quick-card strong {
   margin-bottom: 14px;
   font-size: 1.4rem;
+  white-space: pre-line;
 }
 
 .section-heading {
@@ -373,7 +436,6 @@ h3 {
 }
 
 @media (max-width: 860px) {
-  .site-header,
   .site-footer,
   .call-band,
   .intro-grid,
@@ -384,13 +446,21 @@ h3 {
   }
 
   .site-header {
-    position: static;
+    position: sticky;
+    gap: 14px;
+    padding-inline: 18px;
   }
 
-  nav {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 4px;
+  .primary-nav {
+    margin-left: auto;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: block;
   }
 
   .hero {
@@ -420,13 +490,34 @@ h3 {
 }
 
 @media (max-width: 520px) {
-  nav a:not(.nav-call),
-  .language-switch {
-    display: none;
+  .site-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 10px;
+  }
+
+  .primary-nav {
+    grid-column: 1 / -1;
+    width: 100%;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .language-switch a {
+    min-width: 30px;
+    padding-inline: 6px;
+  }
+
+  .nav-call {
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    padding-inline: 10px;
+    text-align: center;
   }
 
   .brand span:last-child {
-    max-width: 52vw;
+    max-width: 72vw;
     overflow: hidden;
     text-overflow: ellipsis;
   }

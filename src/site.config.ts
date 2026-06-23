@@ -13,13 +13,11 @@ const sharedBusiness = {
   baseUrl: "https://bcbobin.github.io",
   heroImage: `${basePath}/images/fagaras-taxi-hero.png`,
   openingHours: [
-    "Mo 00:00-23:59",
-    "Tu 00:00-23:59",
-    "We 00:00-23:59",
-    "Th 00:00-23:59",
-    "Fr 00:00-23:59",
-    "Sa 00:00-23:59",
-    "Su 00:00-23:59"
+    "Mo 07:00-18:00",
+    "Tu 07:00-18:00",
+    "We 07:00-18:00",
+    "Th 07:00-18:00",
+    "Fr 07:00-18:00"
   ]
 } as const;
 
@@ -31,7 +29,7 @@ export const siteContent = {
       ...sharedBusiness,
       name: "Fagaras Taxi",
       legalName: "Fagaras Taxi Service",
-      tagline: "Reliable local rides, airport transfers, and late-night pickups.",
+      tagline: "Reliable local rides, airport transfers, and pre-booked pickups.",
       description:
         "A simple, dependable taxi service for local trips, airport transfers, appointments, errands, and safe rides home in Fagaras.",
       city: "Fagaras",
@@ -65,7 +63,7 @@ export const siteContent = {
         "Airport transfers",
         "Hotel and event pickups",
         "Medical appointments",
-        "Late-night safe rides",
+        "Scheduled safe rides",
         "Pre-booked trips"
       ],
       reviews: [
@@ -76,7 +74,7 @@ export const siteContent = {
         },
         {
           quote:
-            "Easy to book and dependable after late shifts. Exactly what you want from a local taxi.",
+            "Easy to book and dependable for scheduled rides. Exactly what you want from a local taxi.",
           author: "S. Ionescu"
         }
       ]
@@ -85,20 +83,22 @@ export const siteContent = {
       services: "Services",
       airport: "Airport Taxi",
       serviceAreas: "Service Areas",
-      call: "Call"
+      call: "Call",
+      menu: "Open menu",
+      languageSelector: "Language selector"
     },
     home: {
       title: "Fagaras Taxi | Taxi Service in Fagaras, Brasov",
       description:
         "Call Fagaras Taxi for reliable taxi rides, airport transfers, and pre-booked pickups in Fagaras and nearby areas.",
-      heroEyebrow: "24/7 local taxi service",
+      heroEyebrow: "Local taxi service",
       heroTitle: "Taxi service in Fagaras you can count on",
       viewServiceAreas: "View Service Areas",
       introEyebrow: "Local, direct, dependable",
       introTitle: "Simple taxi booking without the fuss",
       serving: "Serving",
-      available: "Available",
-      availableValue: "24 hours daily",
+      available: "Hours",
+      availableValue: "Mon-Fri: 7:00 a.m. - 6:00 p.m.\nWeekends by special appointment",
       servicesEyebrow: "Services",
       servicesTitle: "Rides for everyday plans and important trips",
       serviceCardText: "Book a clean, comfortable taxi with clear pickup details and friendly local service.",
@@ -152,7 +152,7 @@ export const siteContent = {
       airportTransfers: "Airport transfers",
       airportTransfersText: "Arrange taxi service to the airport with room for luggage and schedule buffers from",
       prebookedRides: "Pre-booked rides",
-      prebookedRidesText: "Plan ahead for appointments, work shifts, early mornings, or late-night rides home."
+      prebookedRidesText: "Plan ahead for appointments, work shifts, early mornings, or scheduled rides home."
     },
     footer: {
       description: "Fagaras, Brasov taxi service for local rides, airport trips, and pre-booked pickups.",
@@ -171,7 +171,7 @@ export const siteContent = {
       ...sharedBusiness,
       name: "Făgăraș Taxi",
       legalName: "Făgăraș Taxi Service",
-      tagline: "Curse locale sigure, transferuri la aeroport și preluări pe timpul nopții.",
+      tagline: "Curse locale sigure, transferuri la aeroport și preluări rezervate.",
       description:
         "Un serviciu de taxi simplu și de încredere pentru curse locale, transferuri la aeroport, programări, comisioane și întoarceri în siguranță acasă în Făgăraș.",
       city: "Făgăraș",
@@ -205,7 +205,7 @@ export const siteContent = {
         "Transferuri la aeroport",
         "Preluări de la hoteluri și evenimente",
         "Programări medicale",
-        "Curse sigure noaptea",
+        "Curse sigure programate",
         "Curse rezervate din timp"
       ],
       reviews: [
@@ -216,7 +216,7 @@ export const siteContent = {
         },
         {
           quote:
-            "Ușor de rezervat și de încredere după turele târzii. Exact ce îți dorești de la un taxi local.",
+            "Ușor de rezervat și de încredere pentru curse programate. Exact ce îți dorești de la un taxi local.",
           author: "S. Ionescu"
         }
       ]
@@ -225,20 +225,22 @@ export const siteContent = {
       services: "Servicii",
       airport: "Taxi Aeroport",
       serviceAreas: "Zone Deservite",
-      call: "Sună"
+      call: "Sună",
+      menu: "Deschide meniul",
+      languageSelector: "Selector de limbă"
     },
     home: {
       title: "Făgăraș Taxi | Serviciu de taxi în Făgăraș, Brașov",
       description:
         "Sună la Făgăraș Taxi pentru curse de taxi de încredere, transferuri la aeroport și preluări rezervate în Făgăraș și în apropiere.",
-      heroEyebrow: "Serviciu local de taxi 24/7",
+      heroEyebrow: "Serviciu local de taxi",
       heroTitle: "Taxi în Făgăraș pe care te poți baza",
       viewServiceAreas: "Vezi zonele deservite",
       introEyebrow: "Local, direct, de încredere",
       introTitle: "Rezervare simplă, fără complicații",
       serving: "Deservim",
-      available: "Disponibil",
-      availableValue: "24 de ore zilnic",
+      available: "Program",
+      availableValue: "Luni-vineri: 7:00-18:00\nWeekend cu programare specială",
       servicesEyebrow: "Servicii",
       servicesTitle: "Curse pentru planurile zilnice și drumurile importante",
       serviceCardText: "Rezervă un taxi curat și confortabil, cu detalii clare de preluare și serviciu local prietenos.",
@@ -292,7 +294,7 @@ export const siteContent = {
       airportTransfers: "Transferuri la aeroport",
       airportTransfersText: "Aranjează taxi către aeroport, cu loc pentru bagaje și timp de rezervă, din",
       prebookedRides: "Curse rezervate",
-      prebookedRidesText: "Planifică din timp pentru programări, ture de lucru, dimineți devreme sau întoarceri târzii acasă."
+      prebookedRidesText: "Planifică din timp pentru programări, ture de lucru, dimineți devreme sau întoarceri programate acasă."
     },
     footer: {
       description: "Serviciu de taxi în Făgăraș, Brașov pentru curse locale, drumuri la aeroport și preluări rezervate.",
